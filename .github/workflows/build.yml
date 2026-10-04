@@ -15,7 +15,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
 
     - name: Set up Java JDK 17
       uses: actions/setup-java@v4
@@ -28,6 +28,7 @@ jobs:
 
     - name: Create Cordova Project Structure
       run: |
+        cordova telemetry off
         cordova create temp_app com.perice.ai PericeAI
         cd temp_app
         rm -rf www/*
