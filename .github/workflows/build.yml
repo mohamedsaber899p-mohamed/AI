@@ -6,19 +6,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
 
     - name: Set up Java JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '17'
@@ -31,7 +31,6 @@ jobs:
         cordova create temp_app com.perice.ai PericeAI
         cd temp_app
         rm -rf www/*
-        # نسخ ملفات مشروعك الحالي إلى مجلد الـ www
         cp -r ../index.html www/
         cp -r ../config.xml ./
         if [ -f "../icon.png" ]; then cp ../icon.png ./; fi
@@ -40,7 +39,7 @@ jobs:
         cordova build android --release
 
     - name: Upload Generated APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Perice-AI-APK
         path: temp_app/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
