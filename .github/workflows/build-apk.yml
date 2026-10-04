@@ -1,0 +1,30 @@
+name: HTML to APK Builder
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Run HTML to APK Action
+        uses: kimhuilim/html-to-apk-action@alpha3
+        with:
+          app-name: "Perice AI"
+          build-folder-path: "./"
+          output-folder-path: "apk/"
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Perice-AI-APK
+          path: apk/
